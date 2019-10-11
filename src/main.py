@@ -1,22 +1,13 @@
-from src import heap, selection
+from src import heap, selection, data_manager
 
 
 def main():
-    vector = [5, 4, 3, 2, 1, 9, 8, 7, 6]
+    files = data_manager.list_files()
 
-    print(vector)
-    s = vector[:]
-    h = vector[:]
-    selection.selection_sort(s)
-    heap.heap_sort(h)
-    print(isSorted(s), isSorted(h))
-
-
-def isSorted(vector):
-    for i in range(len(vector) - 1):
-        if vector[i] > vector[i + 1]:
-            return False
-    return True
+    vector = data_manager.open_input_file(files[0])
+    selection.selection_sort(vector)
+    print(data_manager.is_sorted(vector))
+    data_manager.save_file("teste.csv", vector)
 
 
 if __name__ == '__main__':

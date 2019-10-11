@@ -1,6 +1,8 @@
 import math
 
 
+## http://wiki.icmc.usp.br/images/c/c6/Ordenacao2.pdf
+
 def heap_sort(vector):
     heapsize = len(vector)
 
