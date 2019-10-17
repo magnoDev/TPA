@@ -3,14 +3,17 @@ from src.data import Data
 
 
 def list_files():
-    return glob.glob("./input/*.csv")
+    try:
+        return glob.glob("./input/*.csv")
+    except Exception as err:
+        print(err)
 
 
 def save_file(filename, data):
     os.makedirs("./output/", exist_ok=True)
     try:
-        header: list = ["email", "gender", "uid", "birthdate", "height", "weight"]
-        dataCSV: list = [header]
+        head = ["email", "gender", "uid", "birthdate", "height", "weight"]
+        dataCSV = [head]
         for p in data:
             dataCSV.append([
                 p.email,
