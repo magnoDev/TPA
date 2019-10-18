@@ -1,16 +1,19 @@
 import csv, os, glob
-from src.data import Data
+from data import Data
+
+_INPUT_PATH = "./src/input/"
+_OUTPUT_PATH = "./src/output/"
 
 
 def list_files():
     try:
-        return glob.glob("./input/*.csv")
+        return glob.glob(_INPUT_PATH + "*.csv")
     except Exception as err:
         print(err)
 
 
 def save_file(filename, data):
-    os.makedirs("./output/", exist_ok=True)
+    os.makedirs(_OUTPUT_PATH, exist_ok=True)
     try:
         head = ["email", "gender", "uid", "birthdate", "height", "weight"]
         dataCSV = [head]
@@ -33,14 +36,13 @@ def save_file(filename, data):
 def open_input_file(file):
     vector = []
     try:
-        with open(file, newline='') as csvfile:
+        with open(_INPUT_PATH + file, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 data = Data(row["email"], row["gender"], row["uid"], row["birthdate"], row["height"], row["weight"])
                 vector.append(data)
     except Exception as err:
-        print(err)
-
+        print("Erro ao abrir o arquivo: %s " % err)
     return vector
 
 

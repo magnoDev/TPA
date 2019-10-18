@@ -1,13 +1,8 @@
-from src import heap, selection, data_manager
+import constructor
 
 
 def main():
-    files = data_manager.list_files()
-
-    vector = data_manager.open_input_file(files[0])
-    selection.selection_sort(vector)
-    print(data_manager.is_sorted(vector))
-    data_manager.save_file("teste.csv", vector)
+    constructor.run()
 
 
 if __name__ == '__main__':

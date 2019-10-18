@@ -1,4 +1,9 @@
 import math
+from data import Data
+
+
+def run(data):
+    heap_sort(data)
 
 
 ## http://wiki.icmc.usp.br/images/c/c6/Ordenacao2.pdf
@@ -23,10 +28,10 @@ def heapfy(vector, heapsize, i):
     right = left + 1
     largest = i
 
-    if left < heapsize and vector[left] > vector[largest]:
+    if left < heapsize and vector[left].uid > vector[largest].uid:
         largest = left
 
-    if right < heapsize and vector[right] > vector[largest]:
+    if right < heapsize and vector[right].uid > vector[largest].uid:
         largest = right
 
     if largest != i:
