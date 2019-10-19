@@ -72,7 +72,7 @@ def run_sort(algorithm, input, output, alg_name, times):
             data_manager.save_file("%s_%d_%s" % (alg_name, i + 1, output), data)
             print("Terminou: %d/%d tempo: %f" % (i + 1, times, dif_time))
         print("max: %f min: %f med: %f" % (max_time, min_time, (med_time / times)))
-        records.append([alg_name, times, min_time, max_time, (med_time / times)])
+        records.append([alg_name, output[5:-4], min_time, max_time, (med_time / times)])
 
     else:
         print("timeout")

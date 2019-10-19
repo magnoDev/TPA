@@ -49,7 +49,7 @@ def save_record_time(data):
         f = open(os.path.join(_OUTPUT_PATH, _RECORD_FILE), 'r')
         f.close()
     except:
-        head = ["algorithm", "times", "min", "max", "avg", ]
+        head = ["algorithm", "size", "min", "max", "avg", ]
         dataCSV = [head]
 
     try:
