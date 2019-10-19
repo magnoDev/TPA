@@ -1,13 +1,22 @@
-import csv, os, glob
+import csv, os, glob, sys
 from data import Data
+from record import Record
 
 _INPUT_PATH = "./src/input/"
 _OUTPUT_PATH = "./src/output/"
+_RECORD_FILE = "records.csv"
 
 
 def list_files():
+    files = []
     try:
-        return glob.glob(_INPUT_PATH + "*.csv")
+        files_path = glob.glob(_INPUT_PATH + "*.csv")
+        for f in files_path:
+            if sys.platform == "win32":
+                files.append(f.split("\\")[-1])
+            else:
+                files.append(f.split("/")[-1])
+        return files
     except Exception as err:
         print(err)
 
@@ -26,11 +35,45 @@ def save_file(filename, data):
                 p.height,
                 p.weight
             ])
-        with open(os.path.join("./output/", filename), 'w') as csvFile:
+        with open(os.path.join(_OUTPUT_PATH, filename), 'w+') as csvFile:
+            writer = csv.writer(csvFile)
+            writer.writerows(dataCSV)
+    except Exception as err:
+        print("Erro ao salvar: %s" % (err))
+
+
+def save_record_time(data):
+    os.makedirs(_OUTPUT_PATH, exist_ok=True)
+    dataCSV = []
+    try:
+        f = open(os.path.join(_OUTPUT_PATH, _RECORD_FILE), 'r')
+        f.close()
+    except:
+        head = ["algorithm", "times", "min", "max", "avg", ]
+        dataCSV = [head]
+
+    try:
+
+        for p in data:
+            dataCSV.append(p)
+        with open(os.path.join(_OUTPUT_PATH, _RECORD_FILE), 'a+') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerows(dataCSV)
     except Exception as err:
         print(err)
+
+
+def open_record_time():
+    vector = []
+    try:
+        with open(_INPUT_PATH + _RECORD_FILE, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                data = Record(row["algorithm"], row["times"], row["min"], row["max"], row["avg"])
+                vector.append(data)
+    except Exception as err:
+        return None
+    return vector
 
 
 def open_input_file(file):
