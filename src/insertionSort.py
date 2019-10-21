@@ -1,4 +1,4 @@
-def insertionSort(lista):
+def insertionsort(lista):
     for i in range(1, len(lista)):
         j = i
         while ((lista[j] < lista[j - 1]) and (j > 0)):
