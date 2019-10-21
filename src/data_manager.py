@@ -4,7 +4,7 @@ from record import Record
 
 _INPUT_PATH = "./src/input/"
 _OUTPUT_PATH = "./src/output/"
-_RECORD_FILE = "records.csv"
+_RECORD_FILE = "records.dat"
 
 
 def list_files():
