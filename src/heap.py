@@ -1,7 +1,10 @@
 import math
 from data import Data
 
+import timeout
 
+
+@timeout.timeout(900)
 def run(data):
     heap_sort(data)
 

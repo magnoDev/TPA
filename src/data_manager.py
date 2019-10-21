@@ -23,6 +23,7 @@ def list_files():
 
 def save_file(filename, data):
     os.makedirs(_OUTPUT_PATH, exist_ok=True)
+    print("Sorted %s:" % str(is_sorted(data)))
     try:
         head = ["email", "gender", "uid", "birthdate", "height", "weight"]
         dataCSV = [head]

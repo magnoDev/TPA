@@ -1,3 +1,11 @@
+import timeout
+
+
+@timeout.timeout(900)
+def run(data):
+    selection_sort(data)
+
+
 def selection_sort(vector):
     for index in range(len(vector)):
         minor = index
@@ -5,7 +13,3 @@ def selection_sort(vector):
             if vector[minor].bigger_than(vector[next]):
                 minor = next
         vector[index], vector[minor] = vector[minor], vector[index]
-
-
-def run(data):
-    selection_sort(data)
