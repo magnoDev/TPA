@@ -11,6 +11,7 @@ def list_files():
     files = []
     try:
         files_path = glob.glob(_INPUT_PATH + "*.csv")
+        files_path.sort()
         for f in files_path:
             if sys.platform == "win32":
                 files.append(f.split("\\")[-1])

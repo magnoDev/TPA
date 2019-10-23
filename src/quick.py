@@ -1,3 +1,7 @@
+import timeout
+
+
+@timeout.timeout(900)
 def run(V):
     quicksort(V)
 

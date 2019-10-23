@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 import time, heap, selection, data_manager, quick, merge, insertionsort
 import signal
 
-_ALGORITHMS_list = ["selection", "insertion", "merge", "quick", "heap"]
+_ALGORITHMS_list = ["merge", "quick", "heap","insertion","selection"]
 _ALGORITHMS_dict = {
     "selection": selection.run,
     "insertion": insertionsort.run,
@@ -21,7 +21,7 @@ _TIMEOUT_dict = {
 
 def arguments():
     args = ArgumentParser()
-    args.add_argument("--a", type=str, help=" --a all, selection, insertion, merge, quick, heap or other",
+    args.add_argument("--a",type=str, help=" --a all, selection, insertion, merge, quick, heap or other",
                       required=True)
     args.add_argument("--input", type=str, help="--input data01.csv", required=False)
     args.add_argument("--output", type=str, help="--output data01_sorted.csv", required=False)
@@ -84,6 +84,7 @@ def run_sort(algorithm, input, output, alg_name, times):
                 print("new Timeout %d" % _TIMEOUT_dict[alg_name])
 
             dif_time = f_time - i_time
+            med_time+= dif_time
             if min_time > dif_time:
                 min_time = dif_time
             if max_time < dif_time:
@@ -91,8 +92,8 @@ def run_sort(algorithm, input, output, alg_name, times):
             print("Terminou: %s(%s),  %d/%d tempo: %f" % (alg_name, input[5:-4], i + 1, times, dif_time))
     if not isTimeout:
         # data_manager.save_file("%s_%d_%s" % (alg_name, i + 1, output), data)
-        print("max: %f min: %f med: %f" % (max_time, min_time, ((max_time + min_time) / 2)))
-        records.append([alg_name, input[5:-4], min_time, max_time, ((max_time + min_time) / 2)])
+        print("max: %f min: %f med: %f" % (max_time, min_time, (med_time / times)))
+        records.append([alg_name, input[5:-4], min_time, max_time, (med_time / times)])
     else:
         print("Not executed")
         records.append([alg_name, input[5:-4], -1, -1, -1])
