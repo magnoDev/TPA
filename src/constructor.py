@@ -1,21 +1,23 @@
 from argparse import ArgumentParser
-import time, heap, selection, data_manager, quick, merge, insertionsort
+import time, heap, selection, data_manager, quick, merge, insertionsort , tim
 import signal
 
-_ALGORITHMS_list = ["merge", "quick", "heap","insertion","selection"]
+_ALGORITHMS_list = ['tim']
 _ALGORITHMS_dict = {
     "selection": selection.run,
     "insertion": insertionsort.run,
     "merge": merge.run,
     "quick": quick.run,
-    "heap": heap.run
+    "heap": heap.run,
+    "tim": tim.run
 }
 _TIMEOUT_dict = {
     "selection": 6,
     "insertion": 6,
     "merge": 6,
     "quick": 6,
-    "heap": 6
+    "heap": 6,
+    "tim": 6
 }
 
 
@@ -90,6 +92,7 @@ def run_sort(algorithm, input, output, alg_name, times):
             if max_time < dif_time:
                 max_time = dif_time
             print("Terminou: %s(%s),  %d/%d tempo: %f" % (alg_name, input[5:-4], i + 1, times, dif_time))
+            data=None
     if not isTimeout:
         # data_manager.save_file("%s_%d_%s" % (alg_name, i + 1, output), data)
         print("max: %f min: %f med: %f" % (max_time, min_time, (med_time / times)))
