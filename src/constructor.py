@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-import time, heap, selection, data_manager, quick, merge, insertionsort , tim
+import time, heap, selection, data_manager, quick, merge, insertionsort, tim
 import signal
 
 _ALGORITHMS_list = ['tim']
@@ -23,7 +23,7 @@ _TIMEOUT_dict = {
 
 def arguments():
     args = ArgumentParser()
-    args.add_argument("--a",type=str, help=" --a all, selection, insertion, merge, quick, heap or other",
+    args.add_argument("--a", type=str, help=" --a all, selection, insertion, merge, quick, heap or other",
                       required=True)
     args.add_argument("--input", type=str, help="--input data01.csv", required=False)
     args.add_argument("--output", type=str, help="--output data01_sorted.csv", required=False)
@@ -69,8 +69,10 @@ def run_sort(algorithm, input, output, alg_name, times):
         isTimeout = True
         print("pulou: %s tamanho: %s" % (alg_name, input[-5]))
     for i in range(times):
+        data = None
         print("run %d / %d" % (times - i, times))
         if not isTimeout:
+
             data = data_manager.open_input_file(input)
             try:
                 i_time = time.time()
@@ -86,15 +88,15 @@ def run_sort(algorithm, input, output, alg_name, times):
                 print("new Timeout %d" % _TIMEOUT_dict[alg_name])
 
             dif_time = f_time - i_time
-            med_time+= dif_time
+            med_time += dif_time
             if min_time > dif_time:
                 min_time = dif_time
             if max_time < dif_time:
                 max_time = dif_time
             print("Terminou: %s(%s),  %d/%d tempo: %f" % (alg_name, input[5:-4], i + 1, times, dif_time))
-            data=None
+            # data_manager.save_file("%s_%s" % (alg_name, output), data)
+            print("Ordenado? : %r" % data_manager.is_sorted(data))
     if not isTimeout:
-        # data_manager.save_file("%s_%d_%s" % (alg_name, i + 1, output), data)
         print("max: %f min: %f med: %f" % (max_time, min_time, (med_time / times)))
         records.append([alg_name, input[5:-4], min_time, max_time, (med_time / times)])
     else:
