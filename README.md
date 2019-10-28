@@ -3,7 +3,8 @@ Trabalho de análise e benchmark de algoritmos de ordenação
 
 ## para executar basta ter o Python 3 intalado
 
-usando o comando `python3 ./src/main.py ` é executado o projeto, mas são necessários alguns parametros descritos a bbaixo.3
+usando o comando `python3 ./src/main.py ` é executado o projeto, mas são necessários alguns parametros descritos a baixo.
+
 -  `--a` seleciona os algoritmos
 opções de algoritmos são:
 `all, insertion, heap, merge, quick, selection`
