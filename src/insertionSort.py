@@ -1,10 +1,14 @@
-def insertionsort(lista):
-    for i in range(1, len(lista)):
-        j = i
-        while ((lista[j] < lista[j - 1]) and (j > 0)):
-            aux = lista[j]
-            lista[j] = lista[j - 1]
-            lista[j - 1] = aux
-            j = j - 1
+def insertionSort(arr):
+    # Traverse through 1 to len(arr)
+    for i in range(1, len(arr)):
 
-    return lista
+        key = arr[i]
+
+        # Move elements of arr[0..i-1], that are
+        # greater than key, to one position ahead
+        # of their current position
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
